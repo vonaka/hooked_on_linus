@@ -56,9 +56,9 @@ if [ ! -d .git ]; then
 fi
 
 if git rev-parse --verify HEAD >/dev/null 2>&1; then
-	against=HEAD
+    against=HEAD
 else
-	against=$(git hash-object -t tree /dev/null)
+    against=$(git hash-object -t tree /dev/null)
 fi
 
 files=$(git diff --name-status $against | awk '$1 != "D" { print $2 }')
