@@ -50,13 +50,18 @@ while getopts ih opt; do
     esac
 done
 
-if [ git rev-parse --verify HEAD >/dev/null 2>&1 ]; then
+if [ ! -d .git ]; then
+    echo $linus0
+    exit 1
+fi
+
+if git rev-parse --verify HEAD >/dev/null 2>&1; then
 	against=HEAD
 else
 	against=$(git hash-object -t tree /dev/null)
 fi
 
-files=$(git diff --name-status --cached $against | awk '$1 != "D" { print $2 }')
+files=$(git diff --name-status $against | awk '$1 != "D" { print $2 }')
 random_file=$(for f in $files; do echo $f; done | shuf -n 1)
 if [ "$random_file" == "" ]; then echo $linus0; exit 1; fi
 random_line=$(random_line=$(shuf -n 1 $random_file)
