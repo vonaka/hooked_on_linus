@@ -18,5 +18,5 @@ prepared.
 `hooked_on_linus.sh` is a script that will throw some useful
 observations about the code you try to commit. Just run it in your
 Git directory. You can install it as pre-commit hook via
-`hooked_on_linus.sh -i` (if you are not smart enough to do it
+`hooked_on_linus.sh -i .` (if you are not smart enough to do it
 manually).

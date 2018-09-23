@@ -38,11 +38,15 @@ linus_c="Christ, people. Learn C, instead of just stringing \
 random characters together until it compiles (with warnings)."
 linus_xml="XML is crap. Really. There are no excuses."
 
-usage="Usage: $0 [ -i -h ]"
+usage="Usage: $0 [ -i <git_dir> -h ]"
 
-while getopts ih opt; do
+while getopts i:h opt; do
     case $opt in
-        i) cp $0 .git/hooks/pre-commit
+        i) if [ ! -d $OPTARG/.git ]; then
+               echo "Not a Git directory: $OPTARG"
+               exit 1
+           fi
+           cp $0 $OPTARG/.git/hooks/pre-commit
            echo "pre-commit hook has been installed"
            exit 0;;
         ?) echo $usage
