@@ -2,7 +2,7 @@
 
 set -e
 
-linus0="I don’t care about you."
+linus0="I don't care about you."
 linus1="Quite frankly, that sucks. It's not acceptable."
 linus2="You dun goofed."
 linus3="Guys, this is not a dick-sucking contest."
