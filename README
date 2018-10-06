@@ -1,22 +1,21 @@
-16 Sep 2018 Linus Torvalds sent a message to the LKML which
-contains (among other things) phrases like:
+16 Sep 2018 Linus Torvalds sent a message to the LKML which contains
+(among other things) phrases like:
 
-    "The fact that I then misread people and don't realize (for
-     years) how badly I've judged a situation and contributed
-     to an unprofessional environment is not good."
+    "The fact that I then misread people and don't realize (for years)
+    how badly I've judged a situation and contributed to an
+    unprofessional environment is not good."
 
     "I know now this was not OK and I am truly sorry."
 
-    "I am going to take time off and get some assistance on how
-     to understand people's emotions and respond appropriately."
+    "I am going to take time off and get some assistance on how to
+    understand people's emotions and respond appropriately."
 
-This is not the way we like Linus to talk to people. Quite
-frankly, that sucks. Of course, no matter what, Linus *IS*
-Linus, but in case he changes his behavior we need to be
-prepared.
+This is not the way we like Linus to talk to people. Quite frankly,
+that sucks. Of course, no matter what, Linus *IS* Linus, but in case
+he changes his behavior we need to be prepared.
 
 `hooked_on_linus.sh` is a script that will throw some useful
-observations about the code you try to commit. Just run it in your
-Git directory. You can install it as pre-commit hook via
+observations about the code you try to commit. Just run it in your Git
+directory. You can install it as pre-commit hook via
 `hooked_on_linus.sh -i .` (if you are not smart enough to do it
 manually).
