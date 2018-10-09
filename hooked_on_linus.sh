@@ -42,20 +42,20 @@ usage="Usage: $0 [ -i <git_dir> -h ]"
 
 while getopts i:h opt; do
     case $opt in
-        i) if [ ! -d $OPTARG/.git ]; then
+        i) if [ ! -d "$OPTARG/.git" ]; then
                echo "Not a Git directory: $OPTARG"
                exit 1
            fi
-           cp $0 $OPTARG/.git/hooks/pre-commit
+           cp "$0" "$OPTARG/.git/hooks/pre-commit"
            echo "pre-commit hook has been installed"
            exit 0;;
-        ?) echo $usage
+        ?) echo "$usage"
         exit 1;;
     esac
 done
 
 if [ ! -d .git ]; then
-    echo $linus0
+    echo "$linus0"
     exit 1
 fi
 
@@ -65,20 +65,20 @@ else
     against=$(git hash-object -t tree /dev/null)
 fi
 
-files=$(git diff --name-status $against | awk '$1 != "D" { print $2 }')
-random_file=$(for f in $files; do echo $f; done | shuf -n 1)
-if [ "$random_file" == "" ]; then echo $linus0; exit 1; fi
-random_line=$(random_line=$(shuf -n 1 $random_file)
+files=$(git diff --name-status "$against" | awk '$1 != "D" { print $2 }')
+random_file=$(for f in $files; do echo "$f"; done | shuf -n 1)
+if [ "$random_file" = "" ]; then echo "$linus0"; exit 1; fi
+random_line=$(random_line=$(shuf -n 1 "$random_file")
               if [ -z "$random_line" ]; then
-                  grep -m 1 '[a-zA-Z]' $random_file
+                  grep -m 1 '[a-zA-Z]' "$random_file"
               else
-                  echo $random_line;
+                  echo "$random_line";
               fi)
-random_observation=$(if [ "${random_file##*.}" == "c" ]; then
-                         if [ $((RANDOM % 2)) == 0 ]; then echo "_c";
+random_observation=$(if [ "${random_file##*.}" = "c" ]; then
+                         if [ $((RANDOM % 2)) -eq 0 ]; then echo "_c";
                          else echo $((RANDOM % 22)); fi
-                     elif [ "${random_file##*.}" == "xml" ]; then
-                         if [ $((RANDOM % 2)) == 0 ]; then echo "_xml";
+                     elif [ "${random_file##*.}" = "xml" ]; then
+                         if [ $((RANDOM % 2)) -eq 0 ]; then echo "_xml";
                          else echo $((RANDOM % 22)); fi
                      else echo $((RANDOM % 22)); fi)
 
