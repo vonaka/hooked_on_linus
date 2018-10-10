@@ -75,10 +75,10 @@ random_line=$(random_line=$(shuf -n 1 "$random_file")
                   echo "$random_line";
               fi)
 random_observation=$(if [ "${random_file##*.}" = "c" ]; then
-                         if [ $((RANDOM % 2)) -eq 0 ]; then echo "_c";
+                         if [ $((RANDOM % 2)) -eq 0 ]; then echo "$linus_c";
                          else echo $((RANDOM % 22)); fi
                      elif [ "${random_file##*.}" = "xml" ]; then
-                         if [ $((RANDOM % 2)) -eq 0 ]; then echo "_xml";
+                         if [ $((RANDOM % 2)) -eq 0 ]; then echo "$linus_xml";
                          else echo $((RANDOM % 22)); fi
                      else echo $((RANDOM % 22)); fi)
 
