@@ -65,6 +65,12 @@ else
     against=$(git hash-object -t tree /dev/null)
 fi
 
+eval "$(awk '
+        BEGIN {
+            srand()
+            print "rand1=" int(rand() * 22) "; rand2=" int(rand() * 22)
+        }')"
+
 files=$(git diff --name-status "$against" | awk '$1 != "D" { print $2 }')
 random_file=$(for f in $files; do echo "$f"; done | shuf -n 1)
 if [ "$random_file" = "" ]; then echo "$linus0"; exit 1; fi
@@ -75,14 +81,15 @@ random_line=$(random_line=$(shuf -n 1 "$random_file")
                   echo "$random_line";
               fi)
 random_observation=$(if [ "${random_file##*.}" = "c" ]; then
-                         if [ $((RANDOM % 2)) -eq 0 ]; then echo "_c";
-                         else echo $((RANDOM % 22)); fi
+                         if [ $(($rand1 % 2)) -eq 0 ]; then echo "_c";
+                         else echo "$rand2"; fi
                      elif [ "${random_file##*.}" = "xml" ]; then
-                         if [ $((RANDOM % 2)) -eq 0 ]; then echo "_xml";
-                         else echo $((RANDOM % 22)); fi
-                     else echo $((RANDOM % 22)); fi)
+                         if [ $(($rand1 % 2)) -eq 0 ]; then echo "_xml";
+                         else echo "$rand2"; fi
+                     else echo "$rand1"; fi)
 
-echo -e "From the file" "'$random_file':\n> \033[0;32m$random_line"
-eval "echo -e \"\\033[1;33m\$linus$random_observation\\033[0m\""
+echo "From the file '$random_file':"
+echo "> $random_line"
+eval "echo \"\$linus$random_observation\""
 
 exit 1
