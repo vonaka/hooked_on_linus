@@ -38,10 +38,12 @@ linus_c="Christ, people. Learn C, instead of just stringing \
 random characters together until it compiles (with warnings)."
 linus_xml="XML is crap. Really. There are no excuses."
 
-usage="Usage: $0 [ -i <git_dir> -h ]"
+check_dir="."
+usage="Usage: $0 [ -c <git_dir> -i <git_dir> -h ]"
 
-while getopts i:h opt; do
+while getopts c:i:h opt; do
     case $opt in
+        c) check_dir="$OPTARG";;
         i) if [ ! -d "$OPTARG/.git" ]; then
                echo "Not a Git directory: $OPTARG"
                exit 1
@@ -54,19 +56,20 @@ while getopts i:h opt; do
     esac
 done
 
-if [ ! -d .git ]; then
+if [ ! -d "$check_dir/.git" ]; then
     echo "$linus0"
     exit 1
 fi
 
-if git rev-parse --verify HEAD >/dev/null 2>&1; then
+if git -C "$check_dir" rev-parse --verify HEAD >/dev/null 2>&1; then
     against=HEAD
 else
-    against=$(git hash-object -t tree /dev/null)
+    against=$(git -C "$check_dir" hash-object -t tree /dev/null)
 fi
 
-files=$(git diff --name-status "$against" | awk '$1 != "D" { print $2 }')
-random_file=$(for f in $files; do echo "$f"; done | shuf -n 1)
+files=$(git -C "$check_dir" diff --name-status "$against" |
+            awk '$1 != "D" { print $2 }')
+random_file=$(for f in $files; do echo "$check_dir/$f"; done | shuf -n 1)
 if [ "$random_file" = "" ]; then echo "$linus0"; exit 1; fi
 random_line=$(random_line=$(shuf -n 1 "$random_file")
               if [ -z "$random_line" ]; then
