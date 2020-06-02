@@ -23,7 +23,7 @@ reasons, but it's still a thing of beaty."
 linus14="Is \"I hope you all die a painful death\" too strong?"
 linus15="It's what I call \"mental masturbation\", when you \
 engage in some pointless intellectual exercise that has no \
-possible meaning. "
+possible meaning."
 linus16="Your code is shit.. your argument is shit."
 linus17="Why don't we write code that just works?"
 linus18="I hope I won't end up having to hunt you all down and \
@@ -33,6 +33,8 @@ linus19="There aren't enough swear-words in the English language,\
 my disgust and frustration with this crap."
 linus20="Get rid of it. And I don't *ever* want to see that shit again."
 linus21="...it is pure and utter SHIT."
+linus22="TOTAL CRAP."
+linus23="Incredibly broken shit."
 
 linus_c="Christ, people. Learn C, instead of just stringing \
 random characters together until it compiles (with warnings)."
@@ -79,11 +81,11 @@ random_line=$(random_line=$(shuf -n 1 "$random_file")
               fi)
 random_observation=$(if [ "${random_file##*.}" = "c" ]; then
                          if [ $((RANDOM % 2)) -eq 0 ]; then echo "_c";
-                         else echo $((RANDOM % 22)); fi
+                         else echo $((RANDOM % 24)); fi
                      elif [ "${random_file##*.}" = "xml" ]; then
                          if [ $((RANDOM % 2)) -eq 0 ]; then echo "_xml";
-                         else echo $((RANDOM % 22)); fi
-                     else echo $((RANDOM % 22)); fi)
+                         else echo $((RANDOM % 24)); fi
+                     else echo $((RANDOM % 24)); fi)
 
 echo -e "From the file" "'$random_file':\n> \033[0;32m$random_line"
 eval "echo -e \"\\033[1;33m\$linus$random_observation\\033[0m\""
